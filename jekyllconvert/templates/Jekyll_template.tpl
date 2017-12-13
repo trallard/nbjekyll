@@ -41,9 +41,13 @@ In&nbsp;[&nbsp;]:
 {%- endblock data_html %}
 
 {# Images will be saved in the custom path #}
-{% block data_svg %}
-<img src="{{ output.svg_filename | jekyllpath }}" alt="svg" />
-{% endblock data_svg %}
+{% block data_svg scoped -%}
+{%- if output.svg_filename %}
+<img src="{{ output.svg_filename | jekyllpath }}" alt="svg">
+{%- else %}
+{{ output.data['image/svg+xml'] }}
+{%- endif %}
+{%- endblock data_svg %}
 
 {% block data_png scoped %}
 <div class="output_png output_subarea {{ extra_class }}">
@@ -68,6 +72,22 @@ class="unconfined"
 {%- endblock data_png %}
 
 
-{% block data_jpg %}
-<img src="{{ output.metadata.filenames['image/jpeg'] | jekyllpath }}" alt="jpeg" />
-{% endblock data_jpg %}
+{% block data_jpg scoped %}
+{%- if 'image/jpeg' in output.metadata.get('filenames', {}) %}
+<img src="{{ output.metadata.filenames['image/jpeg'] | jekyllpath }}"
+{%- else %}
+<img src="data:image/jpeg;base64,{{ output.data['image/jpeg'] }}"
+{%- endif %}
+{%- set width=output | get_metadata('width', 'image/jpeg') -%}
+{%- if width is not none %}
+width={{ width }}
+{%- endif %}
+{%- set height=output | get_metadata('height', 'image/jpeg') -%}
+{%- if height is not none %}
+height={{ height }}
+{%- endif %}
+{%- if output | get_metadata('unconfined', 'image/jpeg') %}
+class="unconfined"
+{%- endif %}
+alt="jpg">
+{%- endblock data_jpg %}
