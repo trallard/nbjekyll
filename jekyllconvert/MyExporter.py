@@ -2,8 +2,16 @@
 import os
 import os.path
 
+
+from traitlets import default, Unicode
 from traitlets.config import Config
+
+from nbconvert.filters.highlight import Highlight2HTML
+from nbconvert.filters.markdown_mistune import IPythonRenderer, MarkdownWithMath
+
 from nbconvert.exporters.html import HTMLExporter
+
+
 
 #-----------------------------------------------------------------------------
 # Classes
@@ -14,11 +22,14 @@ class MyExporter(HTMLExporter):
     My custom exporter
     """
 
+    anchor_link_text = Unicode(u'¶', help="The text used as the text for anchor links.").tag(config=True)
+    output_mimetype = 'text/markdown'
+
     def _file_extension_default(self):
         """
         The new file extension is `.test_ext`
         """
-        return '.test_ext'
+        return '.md'
 
     @property
     def template_path(self):
@@ -35,4 +46,31 @@ class MyExporter(HTMLExporter):
         """
         We want to use the new template we ship with our library.
         """
-        return 'test_template' # full
+        return 'test_template'
+
+    @property
+    def default_config(self):
+        c = Config({
+            'NbConvertBase': {
+                'display_data_priority': ['application/vnd.jupyter.widget-state+json',
+                                          'application/vnd.jupyter.widget-view+json',
+                                          'application/javascript',
+                                          'text/html',
+                                          'text/markdown',
+                                          'image/svg+xml',
+                                          'text/latex',
+                                          'image/png',
+                                          'image/jpeg',
+                                          'text/plain'
+                                          ]
+            },
+            'CSSHTMLHeaderPreprocessor': {
+                'enabled': True
+            },
+            'HighlightMagicsPreprocessor': {
+                'enabled': True
+            }
+        })
+        c.merge(super(HTMLExporter, self).default_config)
+        return c
+
