@@ -11,6 +11,9 @@ code_version: 1
 validation_pass:
 ---
 <br />
+{%- if "widgets" in nb.metadata -%}
+<script src="https://unpkg.com/jupyter-js-widgets@2.0.*/dist/embed.js"></script>
+{%- endif-%}
 {%- endblock header -%}
 
 {% block in_prompt -%}
@@ -37,20 +40,17 @@ In&nbsp;[&nbsp;]:
 {{ output.data['text/markdown'] | markdown2html }}
 {%- endblock data_html %}
 
-{# Images handling#}
+{# Images will be saved in the custom path #}
 {% block data_svg %}
-{%- if output.svg_filename %}
-<img src="{{ output.svg_filename | posix_path }}" alt="svg">
-{%- else %}
-{{ output.data['image/svg+xml'] }}
-{%- endif %}
-{%- endblock data_svg %}
+<img src="{{ output.svg_filename | jekyllpath }}" alt="svg" />
+{% endblock data_svg %}
 
 {% block data_png scoped %}
+<div class="output_png output_subarea {{ extra_class }}">
 {%- if 'image/png' in output.metadata.get('filenames', {}) %}
-<img src="{{ output.metadata.filenames['image/png'] | posix_path }}"
+<img src="{{ output.metadata.filenames['image/png'] | jekyllpath}}"
 {%- else %}
-<img src="data:image/png;base64,{{ output.data['image/png'] }}"
+<img src="data:image/png,{{ output.data['image/png'] | jekyllpath  }}"
 {%- endif %}
 {%- set width=output | get_metadata('width', 'image/png') -%}
 {%- if width is not none %}
@@ -63,27 +63,11 @@ height={{ height }}
 {%- if output | get_metadata('unconfined', 'image/png') %}
 class="unconfined"
 {%- endif %}
- alt = 'png'>
-{%- endblock data_png %}
-
-{% block data_jpg scoped %}
-<div class="output_jpeg output_subarea {{ extra_class }}">
-{%- if 'image/jpeg' in output.metadata.get('filenames', {}) %}
-<img src="{{ output.metadata.filenames['image/jpeg'] | posix_path }}"
-{%- else %}
-<img src="data:image/jpeg;base64,{{ output.data['image/jpeg'] }}"
-{%- endif %}
-{%- set width=output | get_metadata('width', 'image/jpeg') -%}
-{%- if width is not none %}
-width={{ width }}
-{%- endif %}
-{%- set height=output | get_metadata('height', 'image/jpeg') -%}
-{%- if height is not none %}
-height={{ height }}
-{%- endif %}
-{%- if output | get_metadata('unconfined', 'image/jpeg') %}
-class="unconfined"
-{%- endif %}
 >
 </div>
-{%- endblock data_jpg %}
+{%- endblock data_png %}
+
+
+{% block data_jpg %}
+<img src="{{ output.metadata.filenames['image/jpeg'] | jekyllpath }}" alt="jpeg" />
+{% endblock data_jpg %}

@@ -46,7 +46,7 @@ class JekyllExporter(HTMLExporter):
         """
         We want to use the new template we ship with our library.
         """
-        return 'test_template'
+        return 'Jekyll_template'
 
     @property
     def default_config(self):
