@@ -67,7 +67,7 @@ height={{ height }}
 {%- if output | get_metadata('unconfined', 'image/png') %}
 class="unconfined"
 {%- endif %}
->
+alt = "png">
 </div>
 {%- endblock data_png %}
 
