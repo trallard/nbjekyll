@@ -1,4 +1,4 @@
-{% extends "basic.tpl" %}
+{% extends 'markdown.tpl' %}
 
 {# custom header for jekyll post #}
 {%- block header -%}
@@ -16,78 +16,62 @@ validation_pass:
 {%- endif-%}
 {%- endblock header -%}
 
+
+
+
 {% block in_prompt -%}
-<div class="prompt input_prompt">
 {%- if cell.execution_count is defined -%}
 {%- if resources.global_content_filter.include_input_prompt-%}
-<font color ='#00bcd4'>In&nbsp;[{{ cell.execution_count|replace(None, "&nbsp;") }}]: </font>
+<font color ='#00bcd4'> In [{{ cell.execution_count }}]: </font>
 {%- else -%}
 In&nbsp;[&nbsp;]:
 {%- endif -%}
 {%- endif -%}
-</div>
 {%- endblock in_prompt %}
 
-{% block data_markdown scoped %}
-{{ output.data['text/markdown'] }}
-{% endblock data_markdown %}
-
-{% block markdowncell scoped %}
-{{ cell.source }}
-{% endblock markdowncell %}
-
-{% block data_html scoped -%}
-{{ output.data['text/markdown'] | markdown2html }}
-{%- endblock data_html %}
 
 {# Images will be saved in the custom path #}
-{% block data_svg scoped -%}
-{%- if output.svg_filename %}
-<img src="{{ output.svg_filename | jekyllpath }}" alt="svg">
-{%- else %}
-{{ output.data['image/svg+xml'] }}
-{%- endif %}
-{%- endblock data_svg %}
+{% block data_svg %}
+<img src="{{ output.metadata.filenames['image/svg+xml'] | jekyllpath }}" alt="svg" />
+{% endblock data_svg %}
 
-{% block data_png scoped %}
-<div class="output_png output_subarea {{ extra_class }}">
-{%- if 'image/png' in output.metadata.get('filenames', {}) %}
-<img src="{{ output.metadata.filenames['image/png'] | jekyllpath}}"
-{%- else %}
-<img src="data:image/png,{{ output.data['image/png'] | jekyllpath  }}"
-{%- endif %}
-{%- set width=output | get_metadata('width', 'image/png') -%}
-{%- if width is not none %}
-width={{ width }}
-{%- endif %}
-{%- set height=output | get_metadata('height', 'image/png') -%}
-{%- if height is not none %}
-height={{ height }}
-{%- endif %}
-{%- if output | get_metadata('unconfined', 'image/png') %}
-class="unconfined"
-{%- endif %}
-alt = "png">
-</div>
-{%- endblock data_png %}
+{% block data_png %}
+<img src="{{ output.metadata.filenames['image/png'] | jekyllpath }}" alt="png"/>
+{% endblock data_png %}
 
+{% block data_jpg %}
+<img src="{{ output.metadata.filenames['image/jpeg'] | jekyllpath }}" alt="jpeg" />
+{% endblock data_jpg %}
 
-{% block data_jpg scoped %}
-{%- if 'image/jpeg' in output.metadata.get('filenames', {}) %}
-<img src="{{ output.metadata.filenames['image/jpeg'] | jekyllpath }}"
-{%- else %}
-<img src="data:image/jpeg;base64,{{ output.data['image/jpeg'] }}"
-{%- endif %}
-{%- set width=output | get_metadata('width', 'image/jpeg') -%}
-{%- if width is not none %}
-width={{ width }}
-{%- endif %}
-{%- set height=output | get_metadata('height', 'image/jpeg') -%}
-{%- if height is not none %}
-height={{ height }}
-{%- endif %}
-{%- if output | get_metadata('unconfined', 'image/jpeg') %}
-class="unconfined"
-{%- endif %}
-alt="jpg">
-{%- endblock data_jpg %}
+{# cells containing markdown text only #}
+{% block markdowncell scoped %}
+{{ cell.source | wrap_text(80) }}
+{% endblock markdowncell %}
+
+{# headings #}
+{% block headingcell scoped %}
+{{ '#' * cell.level }} {{ cell.source | replace('\n', ' ') }}
+{% endblock headingcell %}
+
+{% block stream -%}
+{% endblock stream %}
+
+{# latex data block#}
+{% block data_latex %}
+{{ output.data['text/latex'] }}
+{% endblock data_latex %}
+
+{% block data_text scoped %}
+{{ output.data['text/plain'] | indent }}
+{% endblock data_text %}
+
+{% block data_html scoped -%}
+
+{{ output.data['text/html'] }}
+
+{%- endblock data_html %}
+
+{% block data_markdown scoped -%}
+{{ output.data['text/markdown'] | markdown2html }}
+
+{%- endblock data_markdown %}
