@@ -21,17 +21,24 @@ class nb_repo(object):
 
 
     def check_log(self):
-        """ Check the number of commits be"""
+        """ Check the number of commits in the repository,
+        if there is only one commit it will find all the notebooks.
+        Otherwise it will find the notebooks in the latest commit only
+        """
         all_commits = [commit for commit in self.repo.head.log()]
         if len(all_commits) <= 1:
             print('Only one commit: converting all notebooks')
-            notebooks = find_notebooks()
+            nb_coll = self.find_notebooks()
+            sha1 = self.repo.revparse_single('HEAD').hex[0:7]
+            notebooks = {'sha1': sha1,
+                         'notebooks': notebooks}
             return notebooks
         else:
             print(("There are notebooks already in version control",
                    "finding the notebooks passed in the last commit"))
-            notebooks = last_commit()
-            return noteooks
+            notebooks = self.last_commit()
+            print(notebooks)
+            return notebooks
 
     def find_notebooks(self):
         """ Find all the notebooks in the repo, but excludes those
@@ -49,7 +56,7 @@ class nb_repo(object):
             return notebooks
 
     def last_commit(self):
-        last = repo.revparse_single('HEAD')
+        last = self.repo.revparse_single('HEAD')
         sha1 = last.hex[0:7]
         notebooks = [nb.name for nb in last.tree if '.py' in nb.name]
         nb_coll = {'sha1': sha1,
