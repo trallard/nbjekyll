@@ -34,7 +34,7 @@ class nb_repo(object):
             nb_coll = self.find_notebooks()
             sha1 = self.repo.revparse_single('HEAD').hex[0:7]
             notebooks = {'sha1': sha1,
-                         'notebooks': notebooks}
+                         'notebooks': nb_coll}
             return notebooks
         else:
             print(("There are notebooks already in version control",

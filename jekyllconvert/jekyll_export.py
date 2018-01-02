@@ -128,9 +128,3 @@ def convert_single_nb(notebook_filename):
     resources = init_nb_resources(notebook_filename)
     content, resources = export_notebook(notebook_filename, resources)
     write_outputs(content, resources)
-
-
-
-if __name__ == '__main__':
-    notebook = '/Users/tania/Documents/Git_Repos/Modules-template/_Day1/Tutorial.ipynb'
-    convert_single_nb(notebook)
