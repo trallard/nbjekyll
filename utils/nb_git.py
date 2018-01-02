@@ -60,7 +60,7 @@ class nb_repo(object):
     def last_commit(self):
         last = self.repo.revparse_single('HEAD')
         sha1 = last.hex[0:7]
-        notebooks = [nb.name for nb in last.tree if '.py' in nb.name]
+        notebooks = [nb.name for nb in last.tree if '.ipynb' in nb.name]
         nb_coll = {'sha1': sha1,
                    'notebooks': notebooks}
         return nb_coll
