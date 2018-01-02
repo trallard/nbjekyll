@@ -39,9 +39,10 @@ def export_notebook(notebook_filename, resources):
             resources (possibly modified)
         """
     config = Config()
+    basePath = os.path.dirname(__file__)
     exporter = MarkdownExporter(config = config,
-                                template_path = ['./templates/'],
-                                template_file = 'jekyll.tpl',
+                                template_path = [os.path.join(basePath,'templates/')],
+                                template_file = 'Jekyll_template.tpl',
                                 filters = {'jekyllpath': jekyllpath})
     content, resources = exporter.from_filename(notebook_filename, resources = resources)
     content = parse_html(content)
