@@ -11,6 +11,9 @@ class nb_repo(object):
     repository and add the SHA to the Jinja template"""
 
     def __init__(self, here):
+        """ Find if the current location is a
+        Git repository, if so it will return a
+        repository object """
         try:
             repo_path = pygit2.discover_repository(here)
             repo = pygit2.Repository(repo_path)
@@ -37,7 +40,6 @@ class nb_repo(object):
             print(("There are notebooks already in version control",
                    "finding the notebooks passed in the last commit"))
             notebooks = self.last_commit()
-            print(notebooks)
             return notebooks
 
     def find_notebooks(self):
