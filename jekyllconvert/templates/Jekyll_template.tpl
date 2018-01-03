@@ -6,9 +6,9 @@
 layout: notebook
 title: "{{resources['metadata']['name']}}"
 tags:
-update_date:
-code_version: 1
-validation_pass:
+update_date: ${update_date}
+code_version: ${code_version}
+validation_pass: ${validated}
 ---
 <br />
 {%- if "widgets" in nb.metadata -%}
