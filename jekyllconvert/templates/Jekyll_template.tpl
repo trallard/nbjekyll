@@ -17,8 +17,6 @@ validation_pass: ${validated}
 {%- endblock header -%}
 
 
-
-
 {% block in_prompt -%}
 {%- if cell.execution_count is defined -%}
 {%- if resources.global_content_filter.include_input_prompt-%}
