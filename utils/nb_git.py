@@ -37,7 +37,7 @@ class nb_repo(object):
                          'notebooks': nb_coll}
             return notebooks
         else:
-            print(("There are notebooks already in version control",
+            print(("There are notebooks already in version control,"
                    "finding the notebooks passed in the last commit"))
             notebooks = self.last_commit()
             return notebooks
