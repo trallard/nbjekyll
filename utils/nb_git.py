@@ -4,6 +4,8 @@ import os
 import fnmatch
 import glob
 from pathlib import Path
+from datetime import datetime
+import pytz
 
 class nb_repo(object):
     """ Class containing methods used to
@@ -65,4 +67,8 @@ class nb_repo(object):
                    'notebooks': notebooks}
         return nb_coll
 
+    def convert_time(self):
+        time_zone = pytz.timezone('GMT')
+        dt = datetime.fromtimestamp(commit, time_zone)
+        date = dt.strftime('%Y-%m-%d %H:%M:%S %Z%z')
 
