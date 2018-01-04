@@ -4,6 +4,7 @@ from utils.nb_git import nb_repo
 from jekyllconvert import jekyll_export
 import pytest
 
+
 def validate_nb(nb):
     """
     Run pytest with nbval on the notebooks
@@ -13,6 +14,7 @@ def validate_nb(nb):
     """
     print("Running test on: {}".format(os.path.split(nb)[1]))
     return pytest.main([nb, '--nbval-lax'])
+
 
 def validation_code(exit_code, notebooks):
     """
@@ -47,16 +49,15 @@ def format_template(commit_info, nb):
 
     return template.substitute(commit_info)
 
+
 if __name__ == '__main__':
     here = os.path.dirname(__file__)
-    #here = os.getcwd()
+    # here = os.getcwd()
     repository = nb_repo(os.getcwd())
     notebooks = repository.check_log()
     print(notebooks)
     for nb in notebooks['notebooks']:
-       nb_path = Path(nb).resolve()
-       jekyll_export.convert_single_nb(nb_path)
-       #test = validate_nb(nb_path)
-       format_template(notebooks, nb)
-
-
+        nb_path = Path(nb).resolve()
+        jekyll_export.convert_single_nb(nb_path)
+        # test = validate_nb(nb_path)
+        format_template(notebooks, nb)
