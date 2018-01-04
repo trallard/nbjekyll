@@ -1,6 +1,11 @@
+"""
+Functions used to get details on the git repository
+and its commits.
+It is used to find which notebooks were modified in a specific
+"""
+
 import pygit2
 import os
-
 import fnmatch
 import glob
 from pathlib import Path
