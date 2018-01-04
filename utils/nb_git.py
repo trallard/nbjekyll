@@ -33,15 +33,15 @@ class nb_repo(object):
         Returns
             -------
             notebooks: dictionary containing the sha1 for the commit,
-            the list of found notebooks and the date when the notebooks
-            were last updated
+            the list of found notebooks, author, and the date when
+            the notebooks were last updated
         """
         all_commits = [commit for commit in self.repo.head.log()]
         if len(all_commits) <= 1:
             print('Only one commit: converting all notebooks')
             # calls function find_notebooks
             notebooks = self.find_notebooks()
-            commit_info = get_commit()
+            commit_info = self.get_commit()
             commit_info['notebooks'] = notebooks
 
             return commit_info
@@ -81,7 +81,7 @@ class nb_repo(object):
                     the list notebooks is an empty list
         """
 
-        commit_info = get_commit()
+        commit_info = self.get_commit()
         notebooks = [nb.name for nb in self.repo.revparse_single('HEAD').tree if '.ipynb' in nb.name]
         commit_info['notebooks'] = notebooks
 
@@ -108,7 +108,7 @@ class nb_repo(object):
         last = self.repo.revparse_single('HEAD')
         sha1 = last.hex[0:7]
         author = last.author.name
-        date = convert_time(last.author.time)
+        date = self.convert_time(last.author.time)
         commit_info = {'sha1': sha1,
                    'date': date,
                    'author': author}
