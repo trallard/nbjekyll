@@ -1,3 +1,12 @@
+"""
+This uses the Jekyll markdown exporter to convert .ipynb files
+to .md files.
+It ensures that the images are not saved as base64 but as separate
+.png, .jpg. or .svg files in an images directory and that the
+path to this is accurately updated using a custom jekyllpath filter
+
+It also uses Beautiful soup to do some basic HTML parsing
+"""
 import os
 import io
 
