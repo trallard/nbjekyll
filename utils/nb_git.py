@@ -27,7 +27,8 @@ class nb_repo(object):
             self.repo = repo
             self.here = here
         except:
-            raise IOError ('This does not seem to be a repository')
+            raise OtherException("This does not seem to be a repository,"
+                                 "make sure you are in an initialized repo")
 
 
     def check_log(self):
