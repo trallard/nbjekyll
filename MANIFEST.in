@@ -1,1 +1,1 @@
-include jekyllconvert/templates/*
+include nbjekyll/jekyllconvert/templates/*

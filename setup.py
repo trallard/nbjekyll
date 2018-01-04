@@ -1,7 +1,7 @@
 from setuptools import setup
 import os
 
-name = 'jekyllconvert'
+name = 'nbjekyll'
 
 pkg_root = os.path.join(os.path.dirname(__file__), name)
 here = os.path.dirname(__file__)
@@ -10,7 +10,6 @@ packages = []
 for d, _, _ in os.walk(os.path.join(here, name)):
     if os.path.exists(os.path.join(d, '__init__.py')):
         packages.append(d[len(here)+1:].replace(os.path.sep, '.'))
-
 
 setup_args = dict(name = name,
                   version = '0.2',
