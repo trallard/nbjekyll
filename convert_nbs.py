@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+"""
+Script for conversion of .ipynb files into a format suitable
+for Jekyll blog posts
+"""
+
 import os
 from pathlib import Path
 from utils.nb_git import nb_repo
@@ -5,6 +11,9 @@ from jekyllconvert import jekyll_export
 import pytest
 from string import Template
 
+#-----------------------------------------------------------------------------
+#Classes and functions
+#-----------------------------------------------------------------------------
 
 def validate_nb(nb):
     """
@@ -71,9 +80,16 @@ class NbTemplate(Template):
 
 if __name__ == '__main__':
     here = os.path.dirname(__file__)
-    # here = os.getcwd()
+
+    # Step one: find if this is a repository
     repository = nb_repo(os.getcwd())
+
+    # Find the notebooks that have been added to the repo
+    # or that have been updated in the last commit
     notebooks = repository.check_log()
+
+    # Convert each of the notebooks using nbconvert
+    # then add repo specific information
     for nb in notebooks['notebooks']:
         nb_path = Path(nb).resolve()
         jekyll_export.convert_single_nb(nb_path)
