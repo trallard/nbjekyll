@@ -110,7 +110,7 @@ class nb_repo(object):
         author = last.author.name
         date = self.convert_time(last.author.time)
         commit_info = {'sha1': sha1,
-                   'date': date,
-                   'author': author}
+                       'date': date,
+                       'author': author}
 
         return commit_info
