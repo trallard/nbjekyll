@@ -3,6 +3,7 @@ from pathlib import Path
 from utils.nb_git import nb_repo
 from jekyllconvert import jekyll_export
 import pytest
+from string import Template
 
 
 def validate_nb(nb):
@@ -42,12 +43,26 @@ def format_template(commit_info, nb):
     :return: modified .md for the notebook previously
     converted
     """
-    from string import Template
 
     nb_path = os.path.abspath(nb).replace('ipynb', 'md')
-    template = Template(open(nb_path, 'r').read())
+    with open(nb_path, 'r+') as file:
+        template = NbTemplate(file.read())
+        updated = template.substitute(commit_info)
+        file.seek(0)
+        file.write(updated)
+        file.truncate()
 
-    return template.substitute(commit_info)
+
+class NbTemplate(Template):
+    delimiter = '[-'
+    pattern = r'''
+        \[-(?:
+           (?P<escaped>-) |            # Expression [-- will become [-
+           (?P<named>[^\[\]\n-]+)-\] | # -, [, ], and \n can't be used in names
+           \b\B(?P<braced>) |          # Braced names disabled
+           (?P<invalid>)               #
+        )
+        '''
 
 
 if __name__ == '__main__':
