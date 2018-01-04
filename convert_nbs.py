@@ -14,24 +14,23 @@ def validate_nb(nb):
     see hhttps://docs.pytest.org/en/latest/usage.html?%20main
     """
     print("Running test on: {}".format(os.path.split(nb)[1]))
-    return pytest.main([nb, '--nbval-lax'])
+    return validation_code(pytest.main([nb, '--nbval-lax']))
 
 
-def validation_code(exit_code, notebooks):
+def validation_code(exit_code):
     """
     Check the exit code and pass the value to
     the dictionary containing the commit information
     :param exit_code:
-    :param notebooks:
-    :return: modified dictionary
+    :return: validation status
     """
     if exit_code == 0:
-        notebooks['validated'] = 'yes'
+        validated = 'yes'
     elif exit_code == 1:
-        notebooks['validated'] = 'no'
+        validated = 'no'
     else:
-        notebooks['validated'] = 'unknown'
-    return notebooks
+        validated = 'unknown'
+    return validated
 
 
 def format_template(commit_info, nb):
@@ -54,6 +53,11 @@ def format_template(commit_info, nb):
 
 
 class NbTemplate(Template):
+    """"
+    Subclass of Template, this uses [- -] as the delimiter sequence
+    to replace the template variables instead of the default $, ${}, $$
+    as this causes problems when then notebooks use the R kernel
+    """
     delimiter = '[-'
     pattern = r'''
         \[-(?:
@@ -70,9 +74,9 @@ if __name__ == '__main__':
     # here = os.getcwd()
     repository = nb_repo(os.getcwd())
     notebooks = repository.check_log()
-    print(notebooks)
     for nb in notebooks['notebooks']:
         nb_path = Path(nb).resolve()
         jekyll_export.convert_single_nb(nb_path)
-        # test = validate_nb(nb_path)
+        test = validate_nb(nb_path)
+        notebooks['validated'] = test
         format_template(notebooks, nb)
