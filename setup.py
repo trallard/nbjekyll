@@ -20,12 +20,10 @@ setup_args = dict(name = name,
                   author_email = 't.allard@sheffield.ac.uk',
                   description_file = 'README.md',
                   license = 'MIT',
-                  entry_points ={'nbconvert.exporters': ['md_jk = jekyllconvert:JekyllExporter'],},
-                  include_package_data=True,
+                  include_package_data = True,
                   packages = packages,
-                  zip_safe=False,
-                  install_requires = ['nbconvert'])
-
+                  zip_safe = False,
+                  install_requires = ['pygit2'])
 
 if __name__ == '__main__':
     setup(**setup_args)
