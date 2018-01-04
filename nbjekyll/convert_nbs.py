@@ -6,10 +6,12 @@ for Jekyll blog posts
 
 import os
 from pathlib import Path
-from utils.nb_git import nb_repo
-from jekyllconvert import jekyll_export
-import pytest
 from string import Template
+import pytest
+
+from .utils.nb_git import nb_repo
+from .jekyllconvert import jekyll_export
+
 
 #-----------------------------------------------------------------------------
 #Classes and functions

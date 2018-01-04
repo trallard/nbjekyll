@@ -9,7 +9,7 @@ This is by default specified as `./images/notebook_images/{Notebook_name}` but c
 
 Also, it adds a custom header displaying the version of the notebook (commit sha1), the date when it was last updated, and the author name.
 
-It also uses [nbval](https://github.com/computationalmodelling/nbval) to test the notebooks. Depending on the status code (see [pytest exit codes](https://docs.pytest.org/en/latest/usage.html)) the validation an appropriate badge is added:
+It also uses [nbval](https://github.com/computationalmodelling/nbval) to test the notebooks. Depending on the status code (see [pytest exit codes](https://docs.pytest.org/en/latest/usage.html)) the validation and appropriate badge is added:
 
 ![](https://img.shields.io/badge/notebook-validated-brightgreen.svg)
 
