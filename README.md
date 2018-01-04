@@ -11,8 +11,8 @@ Also, it adds a custom header displaying the version of the notebook (commit sha
 
 It also uses [nbval](https://github.com/computationalmodelling/nbval) to test the notebooks. Depending on the status code (see [pytest exit codes](https://docs.pytest.org/en/latest/usage.html)) the validation an appropriate badge is added:
 
-![MCNotes](https://img.shields.io/badge/notebook-validated-brightgreen.svg)
+![](https://img.shields.io/badge/notebook-validated-brightgreen.svg)
 
-![](https://img.shields.io/badge/notebook-validation failed-red.svg)
+<img src="https://img.shields.io/badge/notebook-validation failed-red.svg">
 
 ![](https://img.shields.io/badge/notebook-unknown%20status-yellow.svg)
