@@ -40,13 +40,11 @@ class nb_repo(object):
         if len(all_commits) <= 1:
             print('Only one commit: converting all notebooks')
             # calls function find_notebooks
-            nb_coll = self.find_notebooks()
-            sha1 = self.repo.revparse_single('HEAD').hex[0:7]
-            author =
+            notebooks = self.find_notebooks()
+            commit_info = get_commit()
+            commit_info['notebooks'] = notebooks
 
-            notebooks = {'sha1': sha1,
-                         'notebooks': nb_coll}
-            return notebooks
+            return commit_info
         else:
             print(("There are notebooks already in version control,"
                    "finding the notebooks passed in the last commit"))
@@ -83,11 +81,11 @@ class nb_repo(object):
                     the list notebooks is an empty list
         """
 
-        nb_coll = get_commit()
-        notebooks = [nb.name for nb in last.tree if '.ipynb' in nb.name]
-        nb_coll['notebooks'] = notebooks
+        commit_info = get_commit()
+        notebooks = [nb.name for nb in self.repo.revparse_single('HEAD').tree if '.ipynb' in nb.name]
+        commit_info['notebooks'] = notebooks
 
-        return nb_coll
+        return commit_info
 
     def convert_time(self, epoch):
         """
