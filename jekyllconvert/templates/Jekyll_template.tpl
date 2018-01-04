@@ -9,6 +9,7 @@ tags:
 update_date: ${update_date}
 code_version: ${code_version}
 validation_pass: ${validated}
+author: ${commit_author}
 ---
 <br />
 {%- if "widgets" in nb.metadata -%}
