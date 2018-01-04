@@ -23,7 +23,7 @@ setup_args = dict(name = name,
                   include_package_data = True,
                   packages = packages,
                   zip_safe = False,
-                  install_requires = ['pygit2'])
+                  install_requires = ['pygit2', 'nbval'])
 
 if __name__ == '__main__':
     setup(**setup_args)
