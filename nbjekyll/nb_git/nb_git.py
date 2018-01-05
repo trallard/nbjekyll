@@ -94,6 +94,7 @@ class nb_repo(object):
         patches = [p for p in diff]
         notebooks = [patch.delta.new_file.path for patch in patches if 'ipynb' in patch.delta.new_file.path]
         commit_info['notebooks'] = notebooks
+        del commit_info['parent']
 
         return commit_info
 
