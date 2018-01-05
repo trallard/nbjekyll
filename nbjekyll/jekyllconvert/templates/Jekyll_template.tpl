@@ -23,7 +23,9 @@ validation_pass: '[-validated-]'
 {%- if resources.global_content_filter.include_input_prompt-%}
 <font color ='#00bcd4'> In [{{ cell.execution_count }}]: </font>
 {%- else -%}
-In:
+<font color ='#00bcd4'>
+In&nbsp;[&nbsp;]:
+</font>
 {%- endif -%}
 {%- endif -%}
 {%- endblock in_prompt %}

@@ -22,7 +22,7 @@ def init_nb_resources(notebook_filename):
             Returns
             -------
             resources dictionary for a single notebook that MUST include:
-                - unique_key: notebook name
+                - unique_key: notebook nametable
     """
     resources = {}
     basename = os.path.basename(notebook_filename)

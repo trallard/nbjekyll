@@ -16,3 +16,19 @@ It also uses [nbval](https://github.com/computationalmodelling/nbval) to test th
 <img src="https://img.shields.io/badge/notebook-validation failed-red.svg">
 
 ![](https://img.shields.io/badge/notebook-unknown%20status-yellow.svg)
+
+
+## Install
+
+## Usage
+Once the package is installed you can start using it directly from
+your Jekyll site directory.
+
+1. Add the Jupyter notebook you want to add to your blog
+2. Commit the notebook or notebooks to Git
+3. Run the Jekyll converter from the terminal. Make sure to run it from the
+upper level of your Jekyll blog
+
+```bash
+python -m nbjekyll.convert_nbs
+``` 
