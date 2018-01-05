@@ -44,7 +44,7 @@ class nb_repo(object):
         """
         all_commits = [commit for commit in self.repo.head.log()]
         if len(all_commits) <= 1:
-            print('Only one commit: converting all notebooks')
+            print('Only one commit: converting all the notebooks in the repo')
             # calls function find_notebooks
             notebooks = self.find_notebooks()
             commit_info = self.get_commit()
