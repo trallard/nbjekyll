@@ -9,7 +9,7 @@ tags:
 update_date: [-date-]
 code_version: [-sha1-]
 author: [-author-]
-validation_pass: [-validated-]
+validation_pass: '[-validated-]'
 ---
 <br />
 {%- if "widgets" in nb.metadata -%}
@@ -23,7 +23,7 @@ validation_pass: [-validated-]
 {%- if resources.global_content_filter.include_input_prompt-%}
 <font color ='#00bcd4'> In [{{ cell.execution_count }}]: </font>
 {%- else -%}
-In&nbsp;[&nbsp;]:
+In:
 {%- endif -%}
 {%- endif -%}
 {%- endblock in_prompt %}
