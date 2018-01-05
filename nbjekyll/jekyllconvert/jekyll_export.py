@@ -106,7 +106,7 @@ def write_outputs(content, resources):
     ensure_dir_exists(imgs_outdir)
 
     # write file in the appropriate format
-    with io.open(outfile, 'w') as fout:
+    with io.open(outfile, 'w', encoding = "utf-8") as fout:
         body = content.prettify(formatter='html')
         fout.write(body)
 
