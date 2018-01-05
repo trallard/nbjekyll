@@ -89,12 +89,20 @@ if __name__ == '__main__':
     # Find the notebooks that have been added to the repo
     # or that have been updated in the last commit
     notebooks = repository.check_log()
+    print(notebooks)
 
     # Convert each of the notebooks using nbconvert
     # then add repo specific information
     for nb in notebooks['notebooks']:
+        # convert the notebook in a .md
+        print('Converting {}'.format(nb))
         nb_path = Path(nb).resolve()
         jekyll_export.convert_single_nb(nb_path)
-        test = validate_nb(nb_path)
-        notebooks['validated'] = test
+
+        # use nbval for the notebook
+        #test = validate_nb(nb_path)
+        #notebooks['validated'] = test
+
+        # substitute header
         format_template(notebooks, nb)
+        print('*****Finalising conversion')
