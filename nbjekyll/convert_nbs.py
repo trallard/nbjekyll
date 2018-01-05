@@ -9,7 +9,7 @@ from pathlib import Path
 from string import Template
 import pytest
 
-from .utils.nb_git import nb_repo
+from .nb_git.nb_git import nb_repo
 from .jekyllconvert import jekyll_export
 
 
@@ -81,7 +81,9 @@ class NbTemplate(Template):
 
 
 if __name__ == '__main__':
-    here = os.path.dirname(__file__)
+    """ Will use the as base path """
+    here = os.getcwd()
+    print(here)
 
     # Step one: find if this is a repository
     repository = nb_repo(os.getcwd())
