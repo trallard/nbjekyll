@@ -88,10 +88,15 @@ class nb_repo(object):
         """
 
         commit_info = self.get_commit()
-        notebooks = [nb.name for nb in self.repo.revparse_single('HEAD').tree if '.ipynb' in nb.name]
+        parent_commit = self.repo.get(commit_info['parent'])
+        #notebooks = [nb.name for nb in self.repo.revparse_single('HEAD').tree if '.ipynb' in nb.name]
+        diff = self.repo.revparse_single('HEAD').tree.diff_to_tree(parent_commit.tree)
+        patches = [p for p in diff]
+        notebooks = [patch.delta.new_file.path for patch in patches if 'ipynb' in patch.delta.new_file.path]
         commit_info['notebooks'] = notebooks
 
         return commit_info
+
 
     def convert_time(self, epoch):
         """
@@ -114,9 +119,13 @@ class nb_repo(object):
         last = self.repo.revparse_single('HEAD')
         sha1 = last.hex[0:7]
         author = last.author.name
+
+        parent_commit_id = last.parents[0].id
+
         date = self.convert_time(last.author.time)
         commit_info = {'sha1': sha1,
                        'date': date,
-                       'author': author}
+                       'author': author,
+                       'parent': parent_commit_id}
 
         return commit_info
