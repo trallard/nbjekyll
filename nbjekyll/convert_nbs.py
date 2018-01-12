@@ -36,11 +36,13 @@ def validation_code(exit_code):
     :return: validation status
     """
     if exit_code == 0:
-        validated = 'yes'
+        # validation passed
+        validated = 'validated-brightgreen'
     elif exit_code == 1:
-        validated = 'no'
+        # tests failed
+        validated = 'validation failed-red'
     else:
-        validated = 'unknown'
+        validated = 'unknown%20status-yellow'
     return validated
 
 

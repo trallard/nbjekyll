@@ -12,6 +12,9 @@ author: [-author-]
 validation_pass: '[-validated-]'
 ---
 <br />
+
+<img src="https://img.shields.io/badge/notebook-[-validated-].svg>
+
 {%- if "widgets" in nb.metadata -%}
 <script src="https://unpkg.com/jupyter-js-widgets@2.0.*/dist/embed.js"></script>
 {%- endif-%}
