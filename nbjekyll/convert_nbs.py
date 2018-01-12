@@ -26,7 +26,7 @@ def validate_nb(nb):
     :return: pytest exit code
     see hhttps://docs.pytest.org/en/latest/usage.html?%20main
     """
-    print("Running test on: {}".format(os.path.split(nb)[1]))
+    print("[nbjekyll] Running test on {}".format(os.path.split(nb)[1]))
     return validation_code(pytest.main([nb, '--nbval-lax']))
 
 
@@ -96,7 +96,7 @@ if __name__ == '__main__':
     else:
         img_path = './images/notebook_images'
 
-    print('Images will be saved in [{}]'.format(img_path))
+    print('[nbjekyll] Images will be saved in [{}]'.format(img_path))
 
     here = os.getcwd()
 
@@ -113,7 +113,7 @@ if __name__ == '__main__':
         nb_path = Path(nb).resolve()
         if os.path.exists(nb_path):
             # convert the notebook in a .md
-            print('Converting [{}]'.format(nb))
+            print('[nbjekyll] Converting [{}]'.format(nb))
             jekyll_export.convert_single_nb(nb_path, img_path)
             # use nbval for the notebook
             test = validate_nb(nb_path)
@@ -121,4 +121,4 @@ if __name__ == '__main__':
 
             # substitute header
             format_template(notebooks, nb)
-            print('** Finalising conversion of [{}]'.format(nb))
+            print('[nbjekyll] Finalising conversion of [{}]'.format(nb))
