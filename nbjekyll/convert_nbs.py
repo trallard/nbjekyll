@@ -38,13 +38,15 @@ def validation_code(exit_code):
     :return: validation status
     """
     if exit_code == 0:
-        validated = 'validated-brightgreen.svg'
+        validated = 'yes'
+        badge = 'validated-brightgreen.svg'
     elif exit_code == 1:
-        validated = 'validation failed-red.svg'
+        validated = 'no'
+        badge = 'validation failed-red.svg'
     else:
-        validated = 'unknown%20status-yellow.svg'
-    return validated
-
+        validated = 'unknown'
+        badge = 'unknown%20status-yellow.svg'
+    return [validated, badge]
 
 def format_template(commit_info, nb):
     """
@@ -117,7 +119,8 @@ if __name__ == '__main__':
             jekyll_export.convert_single_nb(nb_path, img_path)
             # use nbval for the notebook
             test = validate_nb(nb_path)
-            notebooks['validated'] = test
+            notebooks['validated'] = test[0]
+            notebooks['badge'] = test[1]
 
             # substitute header
             format_template(notebooks, nb)

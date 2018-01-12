@@ -9,13 +9,11 @@ tags:
 update_date: [-date-]
 code_version: [-sha1-]
 author: [-author-]
+validation_pass: [-validated-]
+badge: "https://img.shields.io/badge/notebook-[-badge-]"
 ---
 <br />
 
-{#adds validation badge #}
-<img src="https://img.shields.io/badge/notebook-[-validated-]">
-
-<br />
 
 {%- if "widgets" in nb.metadata -%}
 <script src="https://unpkg.com/jupyter-js-widgets@2.0.*/dist/embed.js"></script>
