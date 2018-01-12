@@ -9,11 +9,13 @@ tags:
 update_date: [-date-]
 code_version: [-sha1-]
 author: [-author-]
-validation_pass: '[-validated-]'
 ---
 <br />
 
-<img src="https://img.shields.io/badge/notebook-[-validated-].svg>
+{#adds validation badge #}
+<img src="https://img.shields.io/badge/notebook-[-validated-]">
+
+<br />
 
 {%- if "widgets" in nb.metadata -%}
 <script src="https://unpkg.com/jupyter-js-widgets@2.0.*/dist/embed.js"></script>
@@ -24,9 +26,9 @@ validation_pass: '[-validated-]'
 {% block in_prompt -%}
 {%- if cell.execution_count is defined -%}
 {%- if resources.global_content_filter.include_input_prompt-%}
-<font color='#808080> In&nbsp;[{{ cell.execution_count|replace(None, "&nbsp;") }}]:</font>
+<font color='#808080'> In&nbsp;[{{ cell.execution_count|replace(None, "&nbsp;") }}]:</font>
 {%- else -%}
-<font color='#808080> In&nbsp;[&nbsp;]: </font>
+<font color='#808080'> In&nbsp;[&nbsp;]: </font>
 {%- endif -%}
 {%- endif -%}
 {%- endblock in_prompt %}
