@@ -13,7 +13,7 @@ It also uses [nbval](https://github.com/computationalmodelling/nbval) to test th
 
 ![](https://img.shields.io/badge/notebook-validated-brightgreen.svg)
 
-<img src="https://img.shields.io/badge/notebook-validation failed-red.svg">
+![](img src="https://img.shields.io/badge/notebook-validation failed-red.svg")
 
 ![](https://img.shields.io/badge/notebook-unknown%20status-yellow.svg)
 
@@ -31,4 +31,4 @@ upper level of your Jekyll blog
 
 ```bash
 python -m nbjekyll.convert_nbs
-``` 
+```
