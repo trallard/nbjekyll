@@ -16,7 +16,7 @@ from ipython_genutils.path import ensure_dir_exists
 
 from bs4 import BeautifulSoup
 
-def init_nb_resources(notebook_filename):
+def init_nb_resources(notebook_filename, img_path):
     """Step 1: Initialize resources
             This initializes the resources dictionary for a single notebook.
             Returns
@@ -28,7 +28,8 @@ def init_nb_resources(notebook_filename):
     basename = os.path.basename(notebook_filename)
     notebook_name = basename[:basename.rfind('.')]
     resources['unique_key'] = notebook_name
-    resources['output_files_dir'] = './images/notebook_images/{}'.format(notebook_name)
+    #resources['output_files_dir'] = './images/notebook_images/{}'.format(notebook_name)
+    resources['output_files_dir'] = img_path + '/' +notebook_name
     return resources
 
 def export_notebook(notebook_filename, resources):
@@ -125,7 +126,7 @@ def save_imgs(resources, imgs_outdir):
         with io.open(dest, 'wb+') as f:
             f.write(data)
 
-def convert_single_nb(notebook_filename):
+def convert_single_nb(notebook_filename, img_path):
     """Convert a single notebook.
             Performs the following steps:
                 1. Initialize notebook resources
@@ -134,7 +135,8 @@ def convert_single_nb(notebook_filename):
             Parameters
             ----------
             notebook_filename : str
+            img_path : str
             """
-    resources = init_nb_resources(notebook_filename)
+    resources = init_nb_resources(notebook_filename, img_path)
     content, resources = export_notebook(notebook_filename, resources)
     write_outputs(content, resources)
