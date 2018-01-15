@@ -54,6 +54,3 @@ def rmtree(path):
         onerror = lambda func, path, e: force_rm_handle(func, path, e)
         shutil.rmtree(path, onerror=onerror)
 
-
-def TestLog(unittest.TestCase):
-

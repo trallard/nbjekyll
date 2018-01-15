@@ -27,7 +27,7 @@ class nb_repo(object):
             self.repo = repo
             self.here = here
         except:
-            raise OtherException("This does not seem to be a repository,"
+            raise OtherException("[nbjekyll] This does not seem to be a repository,"
                                  "make sure you are in an initialized repo")
 
 
@@ -44,7 +44,7 @@ class nb_repo(object):
         """
         all_commits = [commit for commit in self.repo.head.log()]
         if len(all_commits) <= 1:
-            print('Only one commit: converting all the notebooks in the repo')
+            print('[nbjekyll] Only one commit: converting all the notebooks in the repo')
             # calls function find_notebooks
             notebooks = self.find_notebooks()
             commit_info = self.get_commit()
@@ -52,8 +52,8 @@ class nb_repo(object):
 
             return commit_info
         else:
-            print(("There are notebooks already in version control,"
-                   "finding the notebooks passed in the last commit"))
+            print(("[nbjekyll] There are notebooks already in version control,"
+                   " finding the notebooks passed in the last commit"))
             # calls function last_commit
             notebooks = self.last_commit()
             return notebooks
@@ -72,7 +72,7 @@ class nb_repo(object):
         notebooks = [nb for nb in notebooksAll if not fnmatch.fnmatch(nb, exception)]
 
         if not(notebooks) == True:
-            print('There were no notebooks found')
+            print('[nbjekyll] There were no notebooks found')
         else:
             return notebooks
 

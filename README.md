@@ -5,7 +5,7 @@ An experimental tool to convert Jupyter notebooks to .md files that could be imm
 Jupyter comes with support for generating .md files by using their own generated exporters and templates. This is a very robust approach, but far from being ideal for .md conversion for Jekyll static blogs.
 
 jekyllconvert uses the nbconvert markdown exporter but ensures that the plots generated in the notebooks are saved in a separate directory.
-This is by default specified as `./images/notebook_images/{Notebook_name}` but can be modified if needed.
+This is by default specified as `./images/notebook_images/{Notebook_name}` but can be modified if needed. For more details see [Usage](#usage).
 
 Also, it adds a custom header displaying the version of the notebook (commit sha1), the date when it was last updated, and the author name.
 
@@ -31,4 +31,9 @@ upper level of your Jekyll blog
 
 ```bash
 python -m nbjekyll.convert_nbs
-``` 
+```
+If you want your output images to be in a different path you can use the flags `-p` `--path` like so:
+
+```bash
+python -m nbjekyll.convert_nbs -p ./site_images
+```

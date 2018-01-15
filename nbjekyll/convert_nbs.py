@@ -5,9 +5,11 @@ for Jekyll blog posts
 """
 
 import os
+
 from pathlib import Path
 from string import Template
 import pytest
+import argparse
 
 from .nb_git.nb_git import nb_repo
 from .jekyllconvert import jekyll_export
@@ -24,7 +26,7 @@ def validate_nb(nb):
     :return: pytest exit code
     see hhttps://docs.pytest.org/en/latest/usage.html?%20main
     """
-    print("Running test on: {}".format(os.path.split(nb)[1]))
+    print("[nbjekyll] Running test on {}".format(os.path.split(nb)[1]))
     return validation_code(pytest.main([nb, '--nbval-lax']))
 
 
@@ -37,12 +39,14 @@ def validation_code(exit_code):
     """
     if exit_code == 0:
         validated = 'yes'
+        badge = 'validated-brightgreen.svg'
     elif exit_code == 1:
         validated = 'no'
+        badge = 'validation failed-red.svg'
     else:
         validated = 'unknown'
-    return validated
-
+        badge = 'unknown%20status-yellow.svg'
+    return [validated, badge]
 
 def format_template(commit_info, nb):
     """
@@ -79,9 +83,23 @@ class NbTemplate(Template):
         )
         '''
 
+def parse_path():
+    arg_parser = argparse.ArgumentParser(description="Convert Jupyter notebooks to Jekyll posts")
+    arg_parser.add_argument('-p', '--path',
+                            help="Custom path to save the Notebook images. The path in the"
+                            " output markdown will be modified accordingly")
+
+    return arg_parser.parse_args()
 
 if __name__ == '__main__':
-    """ Will use the as base path """
+    args = parse_path()
+    if args.path:
+        img_path = args.path
+    else:
+        img_path = './images/notebook_images'
+
+    print('[nbjekyll] Images will be saved in [{}]'.format(img_path))
+
     here = os.getcwd()
 
     # Step one: find if this is a repository
@@ -97,12 +115,13 @@ if __name__ == '__main__':
         nb_path = Path(nb).resolve()
         if os.path.exists(nb_path):
             # convert the notebook in a .md
-            print('Converting {}'.format(nb))
-            jekyll_export.convert_single_nb(nb_path)
+            print('[nbjekyll] Converting [{}]'.format(nb))
+            jekyll_export.convert_single_nb(nb_path, img_path)
             # use nbval for the notebook
             test = validate_nb(nb_path)
-            notebooks['validated'] = test
+            notebooks['validated'] = test[0]
+            notebooks['badge'] = test[1]
 
             # substitute header
             format_template(notebooks, nb)
-            print('*****Finalising conversion of {}'.format(nb))
+            print('[nbjekyll] Finalising conversion of [{}]'.format(nb))
