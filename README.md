@@ -1,5 +1,9 @@
 # nbconvert-jekyllconvert
 
+
+[![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](http://www.repostatus.org/badges/latest/concept.svg)](http://www.repostatus.org/#concept)
+
+
 An experimental tool to convert Jupyter notebooks to .md files that could be immediately passed into Jekyll for publishing.
 
 Jupyter comes with support for generating .md files by using their own generated exporters and templates. This is a very robust approach, but far from being ideal for .md conversion for Jekyll static blogs.
