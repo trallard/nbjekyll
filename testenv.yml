@@ -2,6 +2,6 @@ name: testenv
 dependencies:
   - python=$TRAVIS_PYTHON_VERSION
   - pytest
-- pip:
-  - nbval
-  - pygit2
+  - pip:
+    - nbval
+    - pygit2
