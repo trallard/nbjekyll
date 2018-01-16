@@ -20,7 +20,7 @@ before_install:
 - conda config --set always_yes yes
 - conda update conda
 - conda info -a
-- conda create -n testenv.yml
+- conda create -f env testenv.yml
 - source activate testenv
 
 install:
