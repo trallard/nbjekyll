@@ -67,11 +67,13 @@ class nb_repo(object):
             and dat of the commit
         """
         basePath = Path(os.getcwd())
-        notebooksAll = [nb for nb in glob.glob('**/*.ipynb')]
+        #notebooksAll = [nb for nb in glob.glob('**/*.ipynb')]
+        for root, dirs, files in os.walk(basePath):
+            notebooksAll = [nb for nb in files if nb.endswith('.ipynb')]
         exception = os.path.join(basePath, '/_site/*/*')
         notebooks = [nb for nb in notebooksAll if not fnmatch.fnmatch(nb, exception)]
 
-        if not(notebooks) == True:
+        if not notebooks:
             print('[nbjekyll] There were no notebooks found')
         else:
             return notebooks

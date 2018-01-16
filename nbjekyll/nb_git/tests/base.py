@@ -1,11 +1,9 @@
-import pygit2
-import nbjekyll
-import tempfile
-import unittest
+""" Base TestCase for testing nb_git"""
 import gc
 import os
 import shutil
-
+import unittest
+import tempfile
 
 class NoRepoTestCase(unittest.TestCase):
 
