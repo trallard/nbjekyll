@@ -3,6 +3,8 @@ import os
 import unittest
 import pygit2
 import pytest
+import time
+import datetime
 
 from . import base
 
@@ -38,8 +40,11 @@ def test_get_commit():
     repository = pygit2.Repository(pygit2.discover_repository(here))
     assert last_commit['sha1'] == repository.revparse_single('HEAD').hex[0:7]
 
-def test
-
+def test_convert_time():
+    now = time.time()
+    conv_time = nb_repo(os.getcwd()).convert_time(now)
+    now_full = datetime.datetime.now().strftime("%d-%m-%Y")
+    assert conv_time == now_full
 
 
 if __name__ == '__main__':
