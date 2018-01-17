@@ -4,5 +4,6 @@ dependencies:
   - pytest
   - pip
   - pip:
+    - cffi
     - nbval
     - pygit2

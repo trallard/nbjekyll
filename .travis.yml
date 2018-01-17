@@ -1,6 +1,6 @@
 language: python
 
-sudo: false
+sudo: required
 
 python:
   - 3.6
@@ -10,6 +10,7 @@ env:
     - PACKAGENAME="nbjekyll"
 
 before_install:
+  - sudo apt-get install cmake
   # Here we download miniconda and install the dependencies
   - export MINICONDA=$HOME/miniconda
   - export PATH="$MINICONDA/bin:$PATH"
