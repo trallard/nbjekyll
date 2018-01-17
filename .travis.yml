@@ -19,7 +19,7 @@ before_install:
   - conda config --set always_yes yes
   - conda update conda
   - conda info -a
-  - conda env create -f testenv.yml
+  - conda env create -f python=$TRAVIS_PYTHON_VERSION testenv.yml
   - source activate testenv
 
 install:
