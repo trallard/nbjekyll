@@ -1,5 +1,6 @@
 name: testenv
 dependencies:
+  -python=3.6
   - pytest
   - pip:
     - nbval
