@@ -11,6 +11,13 @@ env:
 
 before_install:
   - sudo apt-get install cmake
+  - git clone git://github.com/libgit2/libgit2.git
+  - cd ./libgit2
+  - git checkout v0.26.0
+  - rm -rf build && mkdir build
+  - cd build
+  - cmake ..
+  - cmake --build
   # Here we download miniconda and install the dependencies
   - export MINICONDA=$HOME/miniconda
   - export PATH="$MINICONDA/bin:$PATH"
