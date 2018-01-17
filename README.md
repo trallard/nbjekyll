@@ -1,8 +1,7 @@
 # nbconvert-jekyllconvert
 
 
-[![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](http://www.repostatus.org/badges/latest/concept.svg)](http://www.repostatus.org/#concept)
-
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
 An experimental tool to convert Jupyter notebooks to .md files that could be immediately passed into Jekyll for publishing.
 
@@ -21,6 +20,7 @@ It also uses [nbval](https://github.com/computationalmodelling/nbval) to test th
 
 ![](https://img.shields.io/badge/notebook-unknown%20status-yellow.svg)
 
+You can see a site using the converted notebooks into a Jekyll site [here](http://bitsandchips.me/Modules-template/) ✨⚡️
 
 ## Install
 
