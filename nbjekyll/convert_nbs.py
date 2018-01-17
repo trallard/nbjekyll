@@ -111,7 +111,6 @@ if __name__ == '__main__':
     # Convert each of the notebooks using nbconvert
     # then add repo specific information
     for nb in notebooks['notebooks']:
-        print('Converting: {}'.format(nb))
         nb_path = Path(nb).resolve()
         if os.path.exists(nb_path):
             # convert the notebook in a .md

@@ -9,7 +9,7 @@ tags:
 update_date: [-date-]
 code_version: [-sha1-]
 author: [-author-]
-validation_pass: [-validated-]
+validation_pass: '[-validated-]'
 badge: "https://img.shields.io/badge/notebook-[-badge-]"
 ---
 <br />

@@ -72,6 +72,7 @@ def parse_html(content):
     if soup.table:
         for tag in soup.find_all('table'):
             tag['class'] = 'table-responsive table-striped'
+            tag['border'] = '0'
     return soup
 
 
