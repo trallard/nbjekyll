@@ -17,7 +17,7 @@ before_install:
   - rm -rf build && mkdir build
   - cd build
   - cmake ..
-  - cmake --build
+  - cmake --build . --target install
   # Here we download miniconda and install the dependencies
   - export MINICONDA=$HOME/miniconda
   - export PATH="$MINICONDA/bin:$PATH"
