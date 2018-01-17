@@ -1,4 +1,4 @@
-# nbconvert-jekyllconvert
+# nbjekyll
 
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
@@ -23,6 +23,10 @@ It also uses [nbval](https://github.com/computationalmodelling/nbval) to test th
 You can see a site using the converted notebooks into a Jekyll site [here](http://bitsandchips.me/Modules-template/) ✨⚡️
 
 ## Install
+You can install nbjekyll using pip like so:
+```bash
+pip install nbjekyll
+```
 
 ## Usage
 Once the package is installed you can start using it directly from
