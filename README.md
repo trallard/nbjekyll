@@ -20,7 +20,7 @@ It also uses [nbval](https://github.com/computationalmodelling/nbval) to test th
 
 ![](https://img.shields.io/badge/notebook-unknown%20status-yellow.svg)
 
-You can see a site using the converted notebooks into a Jekyll site [here](http://bitsandchips.me/Modules-template/) ✨⚡️
+You can see a Jekyll site using the converted notebooks  [here](http://bitsandchips.me/Modules-template/) ✨⚡️
 
 ## Install
 You can install nbjekyll using pip like so:
