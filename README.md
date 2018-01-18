@@ -23,7 +23,7 @@ It also uses [nbval](https://github.com/computationalmodelling/nbval) to test th
 You can see a Jekyll site using the converted notebooks  [here](http://bitsandchips.me/Modules-template/) ✨⚡️
 
 ## Install
-You can install nbjekyll using pip like so:
+nbjekyll is available from [PyPi](https://pypi.python.org/pypi/nbjekyll) so you can install nbjekyll using pip like so:
 ```bash
 pip install nbjekyll
 ```
