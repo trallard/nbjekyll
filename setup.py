@@ -19,7 +19,7 @@ setup_args = dict(name = name,
                   include_package_data = True,
                   packages = find_packages(),
                   zip_safe = False,
-                  install_requires = ['pygit2', 'nbval', 'nbconvert >= 5.0'],
+                  install_requires = ['pygit2', 'nbval', 'nbconvert >= 5.0','pytz'],
                   keywords = ['jekyll', 'nbconvert', 'jupyternotebooks'])
 
 if __name__ == '__main__':

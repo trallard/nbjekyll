@@ -2,6 +2,7 @@ name: testenv
 dependencies:
   - python=3.6
   - pytest
+  - pytz
   - pip
   - pip:
     - nbval
