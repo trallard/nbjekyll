@@ -64,7 +64,7 @@ python -m nbjekyll.convert_nbs -p ./site_images
 ## Important things to consider
 - **You need to commit your notebooks to Git _right_ before using nbjekyll**
 
-At this moment nbjekyll will check for the last commit in your repository and converts the notebooks assocaited to such commit.
+At this moment nbjekyll will check for the last commit in your repository and convert the notebooks associated to such commit.
 
 We are looking into changing this to allow for more flexibility in the near future.
 
