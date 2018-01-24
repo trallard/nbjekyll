@@ -66,10 +66,15 @@ class nb_repo(object):
             notebooks: dictionary containing the sha1, notebooks name,
             and dat of the commit
         """
-        basePath = Path(os.getcwd())
+        basePath = os.getcwd()
         #notebooksAll = [nb for nb in glob.glob('**/*.ipynb')]
+        notebooksAll = list()
         for root, dirs, files in os.walk(basePath):
-            notebooksAll = [nb for nb in files if nb.endswith('.ipynb')]
+            # notebooksAll = [nb for nb in files if nb.endswith('.ipynb')]
+            for file in files:
+                if file.endswith('.ipynb'):
+                    notebooksAll.append(file)
+
         exception = os.path.join(basePath, '/_site/*/*')
         notebooks = [nb for nb in notebooksAll if not fnmatch.fnmatch(nb, exception)]
 
