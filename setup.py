@@ -18,7 +18,7 @@ setup_args = dict(name = name,
 
                   # Author details
                   author = 'Tania Allard',
-                  author_email = 'tania',
+                  author_email = 'taniar.allard@gmail.com',
 
                   license = 'MIT',
                   include_package_data = True,
