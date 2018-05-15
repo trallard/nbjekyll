@@ -30,7 +30,7 @@ setup_args = dict(name = name,
 
                   install_requires = ['pygit2', 'nbval', 'nbconvert >= 5.0','pytz'],
 
-                  keywords =  'jupyter, jekyll, teaching, dissemination, open science'
+                  keywords =  'jupyter, jekyll, teaching, dissemination, open science',
 
                   classifiers = [
                     # Specify the Python versions you support here. In particular, ensure
